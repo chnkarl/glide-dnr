@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <meta
+      http-equiv="X-UA-Compatible"
+      content="ie=edge"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <style>
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      .storyboard_441057 {
+        background: #cbd5e1;
+        padding: 50px;
+        height: 100%;
+        width: 100%;
+        position: relative;
+
+        .main {
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(to bottom right, #e0e7ff, #f0fdfa, #fae8ff, #fee2e2);
+          overflow: hidden;
+
+          .pattern {
+            width: 100%;
+            height: 100%;
+            background: url("/src/assets/images/v1/pattern_square_black.png") repeat;
+            background-size: 15px;
+          }
+        }
+
+        .buttons {
+          position: fixed;
+          top: 0;
+          left: 0;
+          padding-left: 50px;
+          padding-right: 50px;
+          width: 100%;
+          height: 50px;
+          display: flex;
+          align-items: center;
+
+          .form-add,
+          .form-text,
+          .form-image {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 0;
+            border-radius: 8px;
+            border: none;
+          }
+
+          .form-add {
+            margin-right: 16px;
+          }
+
+          .form-text,
+          .form-image {
+            display: none;
+          }
+
+          .toolbar {
+            flex-grow: 1;
+            visibility: hidden;
+            display: flex;
+            gap: 4px;
+            justify-content: flex-end;
+            padding: 4px;
+            z-index: 100004;
+
+            .group {
+              display: inline-flex;
+              gap: 4px;
+              align-items: center;
+
+              .divider {
+                width: 1px;
+                height: 12px;
+                background: #d1d5dc;
+              }
+
+              .toolbar-item {
+                display: inline-flex;
+                padding: 4px;
+                border-radius: 8px;
+                cursor: pointer;
+                box-sizing: border-box;
+
+                &:hover {
+                  background: #f3f4f6;
+                }
+
+                &:active {
+                  background: #e5e7eb;
+                }
+              }
+
+              &.active {
+                .toolbar-item {
+                  background: #0066ff;
+
+                  svg {
+                    fill: #ffffff;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    </style>
+    <title>Glide DNR</title>
+  </head>
+  <body>
+    <div class="storyboard_441057">
+      <form id="form">
+        <div class="buttons">
+          <div class="form-add">
+            <button
+              type="button"
+              class="btn"
+              id="add-text"
+            >
+              <i
+                class="bi bi-fonts"
+                style="font-size: 20px"
+              ></i>
+            </button>
+  
+            <button
+              type="button"
+              class="btn"
+              id="add-image"
+            >
+              <i
+                class="bi bi-image"
+                style="font-size: 16px"
+              ></i>
+            </button>
+          </div>
+  
+          <div
+            class="form-text"
+            id="form-text"
+          >
+            <select
+              class="form-select form-select-sm rounded"
+              style="width: 100px"
+              id="set_font-family"
+            >
+              <option
+                selected
+                value="14px"
+              >
+                14px
+              </option>
+              <option value="16px">16px</option>
+              <option value="18px">18px</option>
+              <option value="20px">20px</option>
+              <option value="22px">22px</option>
+              <option value="24px">24px</option>
+              <option value="26px">26px</option>
+              <option value="28px">28px</option>
+              <option value="30px">30px</option>
+              <option value="34px">34px</option>
+              <option value="33px">38px</option>
+              <option value="42px">42px</option>
+              <option value="48px">48px</option>
+              <option value="56px">56px</option>
+              <option value="62px">62px</option>
+              <option value="68px">68px</option>
+              <option value="74px">74px</option>
+            </select>
+  
+            <select
+              class="form-select form-select-sm rounded"
+              style="width: 100px"
+              id="set_font-weight"
+            >
+              <option
+                selected
+                value="regular"
+              >
+                Regular
+              </option>
+              <option value="bold">Bold</option>
+            </select>
+  
+            <input
+              type="color"
+              id="set_color"
+              class="form-control rounded"
+              style="height: 31px; width: 46px"
+            />
+  
+            <input
+              type="text"
+              id="set_content"
+              class="form-control rounded"
+              style="height: 31px; width: 240px"
+            />
+          </div>
+  
+          <div
+            class="form-image"
+            id="form-image"
+          >
+            <input
+              class="form-control form-control-sm rounded"
+              id="set_upload"
+              type="file"
+            />
+          </div>
+  
+          <div class="toolbar">
+            <div
+              class="group aligns"
+              id="aligns"
+            >
+              <div class="toolbar-item horizontal-left">
+                <svg
+                  svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="18px"
+                  viewBox="0 -960 960 960"
+                  width="18px"
+                  fill="#030713"
+                >
+                  <path
+                    d="M145.39-100q-12.77 0-21.39-8.62-8.61-8.61-8.61-21.38v-700q0-12.77 8.61-21.38 8.62-8.62 21.39-8.62 12.77 0 21.38 8.62 8.62 8.61 8.62 21.38v700q0 12.77-8.62 21.38-8.61 8.62-21.38 8.62Zm171.92-193.85q-20.77 0-35.58-14.8-14.8-14.81-14.8-35.58 0-20.77 14.8-35.58 14.81-14.8 35.58-14.8h236.92q20.77 0 35.58 14.8 14.8 14.81 14.8 35.58 0 20.77-14.8 35.58-14.81 14.8-35.58 14.8H317.31Zm0-271.54q-20.77 0-35.58-14.8-14.8-14.81-14.8-35.58 0-20.77 14.8-35.58 14.81-14.8 35.58-14.8h476.92q20.77 0 35.58 14.8 14.8 14.81 14.8 35.58 0 20.77-14.8 35.58-14.81 14.8-35.58 14.8H317.31Z"
+                  />
+                </svg>
+              </div>
+              <div class="toolbar-item horizontal-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="18px"
+                  viewBox="0 -960 960 960"
+                  width="18px"
+                  fill="#030713"
+                >
+                  <path
+                    d="M450-130v-163.85H310.39q-20.77 0-35.58-14.8Q260-323.46 260-344.23q0-20.77 14.81-35.58 14.81-14.8 35.58-14.8H450v-170.78H190.39q-20.77 0-35.58-14.8Q140-595 140-615.77q0-20.77 14.81-35.58 14.81-14.8 35.58-14.8H450V-830q0-12.75 8.63-21.37 8.63-8.63 21.38-8.63 12.76 0 21.37 8.63Q510-842.75 510-830v163.85h259.61q20.77 0 35.58 14.8Q820-636.54 820-615.77q0 20.77-14.81 35.58-14.81 14.8-35.58 14.8H510v170.78h139.61q20.77 0 35.58 14.8Q700-365 700-344.23q0 20.77-14.81 35.58-14.81 14.8-35.58 14.8H510V-130q0 12.75-8.63 21.37-8.63 8.63-21.38 8.63-12.76 0-21.37-8.63Q450-117.25 450-130Z"
+                  />
+                </svg>
+              </div>
+              <div class="toolbar-item horizontal-right">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="18px"
+                  viewBox="0 -960 960 960"
+                  width="18px"
+                  fill="#030713"
+                >
+                  <path
+                    d="M814.61-100q-12.77 0-21.38-8.62-8.62-8.61-8.62-21.38v-700q0-12.77 8.62-21.38 8.61-8.62 21.38-8.62t21.39 8.62q8.61 8.61 8.61 21.38v700q0 12.77-8.61 21.38-8.62 8.62-21.39 8.62ZM405.77-293.85q-20.77 0-35.58-14.8-14.8-14.81-14.8-35.58 0-20.77 14.8-35.58 14.81-14.8 35.58-14.8h236.92q20.77 0 35.58 14.8 14.8 14.81 14.8 35.58 0 20.77-14.8 35.58-14.81 14.8-35.58 14.8H405.77Zm-240-271.54q-20.77 0-35.58-14.8-14.8-14.81-14.8-35.58 0-20.77 14.8-35.58 14.81-14.8 35.58-14.8h476.92q20.77 0 35.58 14.8 14.8 14.81 14.8 35.58 0 20.77-14.8 35.58-14.81 14.8-35.58 14.8H165.77Z"
+                  />
+                </svg>
+              </div>
+  
+              <div class="divider"></div>
+  
+              <div class="toolbar-item vertical-top">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="18px"
+                  viewBox="0 -960 960 960"
+                  width="18px"
+                  fill="#030713"
+                >
+                  <path
+                    d="M344.23-110q-20.77 0-35.58-14.81-14.8-14.81-14.8-35.58v-488.07q0-20.77 14.8-35.58 14.81-14.8 35.58-14.8 20.77 0 35.58 14.8 14.8 14.81 14.8 35.58v488.07q0 20.77-14.8 35.58Q365-110 344.23-110Zm271.54-240q-20.77 0-35.58-14.81-14.8-14.81-14.8-35.58v-248.07q0-20.77 14.8-35.58 14.81-14.8 35.58-14.8 20.77 0 35.58 14.8 14.8 14.81 14.8 35.58v248.07q0 20.77-14.8 35.58Q636.54-350 615.77-350ZM130-790.38q-12.77 0-21.38-8.62-8.62-8.61-8.62-21.38t8.62-21.39q8.61-8.61 21.38-8.61h700q12.77 0 21.38 8.61 8.62 8.62 8.62 21.39 0 12.77-8.62 21.38-8.61 8.62-21.38 8.62H130Z"
+                  />
+                </svg>
+              </div>
+              <div class="toolbar-item vertical-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="18px"
+                  viewBox="0 -960 960 960"
+                  width="18px"
+                  fill="#030713"
+                >
+                  <path
+                    d="M342.31-140q-20.77 0-35.58-14.81-14.81-14.81-14.81-35.58V-450H130q-12.75 0-21.37-8.63-8.63-8.63-8.63-21.38 0-12.76 8.63-21.37Q117.25-510 130-510h161.92v-259.61q0-20.77 14.81-35.58Q321.54-820 342.31-820q20.77 0 35.57 14.81 14.81 14.81 14.81 35.58V-510h174.62v-139.61q0-20.77 14.81-35.58Q596.92-700 617.69-700t35.58 14.81q14.81 14.81 14.81 35.58V-510H830q12.75 0 21.37 8.63 8.63 8.63 8.63 21.38 0 12.76-8.63 21.37Q842.75-450 830-450H668.08v139.61q0 20.77-14.81 35.58Q638.46-260 617.69-260q-20.77 0-35.57-14.81-14.81-14.81-14.81-35.58V-450H392.69v259.61q0 20.77-14.81 35.58Q363.08-140 342.31-140Z"
+                  />
+                </svg>
+              </div>
+              <div class="toolbar-item vertical-bottom">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="18px"
+                  viewBox="0 -960 960 960"
+                  width="18px"
+                  fill="#030713"
+                >
+                  <path
+                    d="M130-110q-12.77 0-21.38-8.62Q100-127.23 100-140t8.62-21.39Q117.23-170 130-170h700q12.77 0 21.38 8.61Q860-152.77 860-140q0 12.77-8.62 21.38Q842.77-110 830-110H130Zm214.23-151.54q-20.77 0-35.58-14.81-14.8-14.81-14.8-35.57V-800q0-20.77 14.8-35.57 14.81-14.81 35.58-14.81 20.77 0 35.58 14.81 14.8 14.8 14.8 35.57v488.08q0 20.76-14.8 35.57-14.81 14.81-35.58 14.81Zm271.54 0q-20.77 0-35.58-14.81-14.8-14.81-14.8-35.57V-560q0-20.77 14.8-35.57 14.81-14.81 35.58-14.81 20.77 0 35.58 14.81 14.8 14.8 14.8 35.57v248.08q0 20.76-14.8 35.57-14.81 14.81-35.58 14.81Z"
+                  />
+                </svg>
+              </div>
+  
+              <div class="divider"></div>
+  
+              <div class="toolbar-item horizontal-distribute">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="18px"
+                  viewBox="0 -960 960 960"
+                  width="18px"
+                  fill="#030713"
+                >
+                  <path
+                    d="M129.99-100q-12.76 0-21.37-8.63Q100-117.25 100-130v-700q0-12.75 8.63-21.37 8.63-8.63 21.38-8.63 12.76 0 21.37 8.63Q160-842.75 160-830v700q0 12.75-8.63 21.37-8.63 8.63-21.38 8.63Zm350.06-190q-20.82 0-35.43-14.58Q430-319.17 430-340v-280q0-20.83 14.57-35.42Q459.14-670 479.95-670q20.82 0 35.43 14.58Q530-640.83 530-620v280q0 20.83-14.57 35.42Q500.86-290 480.05-290Zm349.94 190q-12.76 0-21.37-8.63Q800-117.25 800-130v-700q0-12.75 8.63-21.37 8.63-8.63 21.38-8.63 12.76 0 21.37 8.63Q860-842.75 860-830v700q0 12.75-8.63 21.37-8.63 8.63-21.38 8.63Z"
+                  />
+                </svg>
+              </div>
+  
+              <div class="toolbar-item vertical-distribute">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="18px"
+                  viewBox="0 -960 960 960"
+                  width="18px"
+                  fill="#030713"
+                >
+                  <path
+                    d="M130-100q-12.75 0-21.37-8.63-8.63-8.63-8.63-21.38 0-12.76 8.63-21.37Q117.25-160 130-160h700q12.75 0 21.37 8.63 8.63 8.63 8.63 21.38 0 12.76-8.63 21.37Q842.75-100 830-100H130Zm210-330q-20.83 0-35.42-14.57Q290-459.14 290-479.95q0-20.82 14.58-35.43Q319.17-530 340-530h280q20.83 0 35.42 14.57Q670-500.86 670-480.05q0 20.82-14.58 35.43Q640.83-430 620-430H340ZM130-800q-12.75 0-21.37-8.63-8.63-8.63-8.63-21.38 0-12.76 8.63-21.37Q117.25-860 130-860h700q12.75 0 21.37 8.63 8.63 8.63 8.63 21.38 0 12.76-8.63 21.37Q842.75-800 830-800H130Z"
+                  />
+                </svg>
+              </div>
+  
+              <div class="divider"></div>
+            </div>
+  
+            <div
+              class="group measure"
+              id="measure"
+            >
+              <div class="toolbar-item">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="18"
+                  viewBox="0 -960 960 960"
+                  width="18"
+                  fill="#030713"
+                >
+                  <path
+                    d="M172.31-260Q142-260 121-281q-21-21-21-51.44v-295.12Q100-658 121-679q21-21 51.31-21h615.38Q818-700 839-679q21 21 21 51.44v295.12Q860-302 839-281q-21 21-51.31 21H172.31Zm0-60h615.38q4.62 0 8.46-3.85 3.85-3.84 3.85-8.46v-295.38q0-4.62-3.85-8.46-3.84-3.85-8.46-3.85H670v114.61q0 12.75-8.63 21.38-8.63 8.62-21.38 8.62-12.76 0-21.37-8.62-8.62-8.63-8.62-21.38V-640H510v114.61q0 12.75-8.63 21.38-8.63 8.62-21.38 8.62-12.76 0-21.37-8.62-8.62-8.63-8.62-21.38V-640H350v114.61q0 12.75-8.63 21.38-8.63 8.62-21.38 8.62-12.76 0-21.37-8.62-8.62-8.63-8.62-21.38V-640H172.31q-4.62 0-8.46 3.85-3.85 3.84-3.85 8.46v295.38q0 4.62 3.85 8.46 3.84 3.85 8.46 3.85ZM320-495.39Zm160 0Zm160 0ZM480-480Z"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+      </form>
+    </div>
+
+      <div class="main">
+
+        <div class="pattern">
+          <glide-dnr id="glide-dnr" toolbar measure toolbar-placement="float">
+
+            <glide-dnr-item id="id-001" left="500" top="500" width="200">html</glide-dnr-item>
+
+            <glide-dnr-item type="image" id="id-002" width="240" height="240" left="100">
+              <img src="./assets/images/v1/qrcode.png" />
+            </glide-dnr-item>
+
+            <!-- <div
+              class="glide-dnr_item image"
+              style="
+                width: 140px;
+                height: 140px;
+                background: #baf5fd;
+                translate: 100px 200px;
+              "
+            >
+              <img src="./assets/images/v1/qrcode.png" />
+            </div>
+    
+            <div
+              class="glide-dnr_item image"
+              draggable="false"
+              style="height: 100px; translate: 100px 200px"
+            >
+              <img src="./assets/images/v1/illustrations/calendar (no shadow).png" />
+            </div> -->
+    
+            <!-- 
+            <div
+              class="glide-dnr_item text"
+              style="
+                width: 240px;
+                font-size: 14px;
+                background: yellow;
+                translate: 130px 100px;
+              "
+            >
+              豫章故郡，洪都新府。星分翼轸，地接衡庐。襟三江而带五湖，控蛮荆而引瓯越。物华天宝，龙光射牛斗之墟；人杰地灵，徐孺下陈蕃之榻。
+            </div> -->
+    
+            <!-- 
+    
+            <div
+              class="glide-dnr_item text"
+              style="
+                background: lime;
+                translate: 130px 100px;
+                font-size: 18px;
+                font-weight: 700;
+              "
+            >
+              Hello Glide-dnr
+            </div>
+    
+            <div
+              class="glide-dnr_item text"
+              style="
+                translate: 130px 100px;
+                font-weight: 700;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              "
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                width="48"
+                height="48"
+                fill="purple"
+                class="size-6"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M9 4.5a.75.75 0 0 1 .721.544l.813 2.846a3.75 3.75 0 0 0 2.576 2.576l2.846.813a.75.75 0 0 1 0 1.442l-2.846.813a3.75 3.75 0 0 0-2.576 2.576l-.813 2.846a.75.75 0 0 1-1.442 0l-.813-2.846a3.75 3.75 0 0 0-2.576-2.576l-2.846-.813a.75.75 0 0 1 0-1.442l2.846-.813A3.75 3.75 0 0 0 7.466 7.89l.813-2.846A.75.75 0 0 1 9 4.5ZM18 1.5a.75.75 0 0 1 .728.568l.258 1.036c.236.94.97 1.674 1.91 1.91l1.036.258a.75.75 0 0 1 0 1.456l-1.036.258c-.94.236-1.674.97-1.91 1.91l-.258 1.036a.75.75 0 0 1-1.456 0l-.258-1.036a2.625 2.625 0 0 0-1.91-1.91l-1.036-.258a.75.75 0 0 1 0-1.456l1.036-.258a2.625 2.625 0 0 0 1.91-1.91l.258-1.036A.75.75 0 0 1 18 1.5ZM16.5 15a.75.75 0 0 1 .712.513l.394 1.183c.15.447.5.799.948.948l1.183.395a.75.75 0 0 1 0 1.422l-1.183.395c-.447.15-.799.5-.948.948l-.395 1.183a.75.75 0 0 1-1.422 0l-.395-1.183a1.5 1.5 0 0 0-.948-.948l-1.183-.395a.75.75 0 0 1 0-1.422l1.183-.395c.447-.15.799-.5.948-.948l.395-1.183A.75.75 0 0 1 16.5 15Z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </div> -->
+    
+            <!-- <div
+              class="glide-dnr_item image"
+              draggable="false"
+              style="width: 120px; translate: 20px 20px;"
+            >
+              <img
+                src="./assets/images/v1/illustrations/Diagram.png"
+              />
+            </div>
+    
+            <div
+              class="glide-dnr_item image"
+              draggable="false"
+              style="width: 120px; translate:20px 20px;"
+            >
+              <img
+                src="./assets/images/v1/illustrations/gold cup (no shadow).png"
+              />
+            </div>
+    
+            <div
+              class="glide-dnr_item image"
+              draggable="false"
+              style="width: 120px; translate:20px 20px;"
+            >
+              <img
+                src="./assets/images/v1/illustrations/Hamster.png"
+              />
+            </div>-->
+    
+            <!-- <div
+              class="glide-dnr_item image"
+              draggable="false"
+              style="height: 125px; translate:20px 20px;"
+            >
+              <img
+                src="./assets/images/v1/illustrations/pill (with particles).png"
+              />
+            </div> -->
+    
+            <!-- <div
+              id="item-001"
+              class="glide-dnr_item image"
+              draggable="false"
+              style="width: 100px; translate: 20px 20px; z-index: 3; visibility: hidden"
+            >
+              <img src="./assets/images/v1/illustrations/Richie_3.png" />
+            </div>
+    
+            <div
+              id="item-002"
+              class="glide-dnr_item image"
+              draggable="false"
+              style="width: 240px; translate: 200px 200px; z-index: 2; visibility: hidden"
+            >
+              <img src="./assets/images/v1/illustrations/Pixel heart.png" />
+            </div>
+    
+            <div
+              id="item-003"
+              class="glide-dnr_item image"
+              draggable="false"
+              style="width: 80px; translate: 20px 20px; z-index: 2; visibility: hidden"
+            >
+              <img src="./assets/images/v1/illustrations/Pacman.png" />
+            </div> -->
+    
+            <!-- <div
+              class="glide-dnr_item text"
+              style="
+                font-size: 100px;
+                translate: 500px 200px;
+                font-weight: 700;
+                color: pink;
+              "
+            >
+              <div
+                style="
+                  /* 渐变背景 */
+                  background: linear-gradient(90deg, red, orange);
+                  /* 将背景限制在文本内 */
+                  -webkit-background-clip: text;
+                  background-clip: text;
+                  /* 让文本颜色透明，以显示背景渐变 */
+                  -webkit-text-fill-color: transparent;
+                  /* 可选：设置默认文本颜色，以防渐变不被支持 */
+                  color: red;
+                "
+              >
+                Glide DND-ZOOM
+              </div>
+            </div>
+    
+            <div
+              class="glide-dnr_item text"
+              style="font-size: 28px; translate: 0px 400px; font-weight: 500;word-break: break-word;"
+            >
+              An extremely smooth drag-and-resize JavaScript plugin for creators.
+            </div> -->
+    
+            <!-- <div
+              class="glide-dnr_item background"
+              style="width: 500px; height: 500px; z-index: 1;"
+            ></div> -->
+          </glide-dnr>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script type="module">
+    // import GlideDNR from "./GlideDNR.ts"
+    // import GlideDNRItem from "./GlideDNRItem.ts"
+    import GlideDNR from "/dist/GlideDNR.js"
+    import GlideDNRItem from "/dist/GlideDNRItem.js"
+  </script>
+
+  <script>
+    let selectedId = ""
+
+    const elFormText = document.querySelector("#form-text")
+    const elFormImage = document.querySelector("#form-image")
+
+    const elButterBoard = document.querySelector("#glide-dnr")
+
+    if (elButterBoard !== null) {
+      // 点击新增文字
+      const elAddText = document.querySelector("#add-text")
+
+      if (elAddText !== null) {
+        elAddText.addEventListener("click", (e) => {
+
+          const id = (new Date).getTime()
+
+          const htmlString = `
+          <glide-dnr-item id="item-${id}" style="font-size: 16px; word-break: break-word;">
+            html
+          </glide-dnr-item>
+          `
+
+          // 创建一个 DocumentFragment
+          const fragment = document
+            .createRange()
+            .createContextualFragment(htmlString)
+
+          elButterBoard.appendChild(fragment)
+        })
+      }
+
+      // 点击新增图片
+      const elAddImage = document.querySelector("#add-image")
+
+      if (elAddImage !== null) {
+        elAddImage.addEventListener("click", (e) => {
+
+          const id = (new Date).getTime()
+
+          const htmlString = `
+          <glide-dnr-item type="image" id="item-${id}" width="124">
+            <img src="./assets/images/v1/illustrations/Pixel heart.png" />
+          </glide-dnr-item>
+          `
+
+          // 创建一个 DocumentFragment
+          const fragment = document
+            .createRange()
+            .createContextualFragment(htmlString)
+
+          elButterBoard.appendChild(fragment)
+        })
+      }
+
+      elButterBoard.addEventListener("onSelect", (e) => {
+        if (e.detail.length === 1) {
+          selectedId = e.detail[0].id
+
+          const el = document.querySelector(`#${selectedId}`)
+
+          if (e.detail[0].type === "text") {
+            if (elFormText !== null) {
+              elFormText.style.display = "inline-flex"
+            }
+
+            if (elFormImage !== null) {
+              elFormImage.style.display = "none"
+            }
+          }
+
+          if (e.detail[0].type === "image") {
+            if (elFormImage !== null) {
+              elFormImage.style.display = "inline-flex"
+            }
+
+            if (elFormText !== null) {
+              elFormText.style.display = "none"
+            }
+          }
+        } else {
+          if (elFormText !== null) {
+            elFormText.style.display = "none"
+          }
+
+          if (elFormImage !== null) {
+            elFormImage.style.display = "none"
+          }
+
+          const elForm = document.querySelector(`#form`)
+
+          if (elForm !== null) {
+            elForm.reset()
+          }
+        }
+      })
+    }
+
+    elButterBoard.addEventListener("onActions", (e) => {
+      
+      console.log('e.detail: ', e.detail)
+
+    })
+    
+
+    // 监听移动和缩放
+    elButterBoard.addEventListener("onChange", (e) => {
+      // console.log('e.detail: ', e.detail)
+    })
+
+    const elSetFontFamily = document.getElementById("set_font-family")
+
+    if (elSetFontFamily !== null) {
+      elSetFontFamily.addEventListener("change", () => {
+        console.log("value: ", elSetFontFamily.value)
+
+        const elSelected = document.querySelector(`#${selectedId}`)
+
+        if (elSelected !== null) {
+          elSelected.style.fontSize = elSetFontFamily.value
+        }
+      })
+    }
+
+    const elSetFontWeight = document.getElementById("set_font-weight")
+
+    if (elSetFontWeight !== null) {
+      elSetFontWeight.addEventListener("change", () => {
+        const elSelected = document.querySelector(`#${selectedId}`)
+
+        if (elSelected !== null) {
+          elSelected.style.fontWeight = elSetFontWeight.value
+        }
+      })
+    }
+
+    const elSetColor = document.getElementById("set_color")
+
+    if (elSetColor !== null) {
+      elSetColor.addEventListener("input", (e) => {
+        const elSelected = document.querySelector(`#${selectedId}`)
+
+        if (elSelected !== null) {
+          elSelected.style.color = e.target.value
+        }
+      })
+    }
+
+    const elSetContent = document.getElementById("set_content")
+
+    if (elSetContent !== null) {
+      elSetContent.addEventListener("input", (e) => {
+        const elSelected = document.querySelector(`#${selectedId}`)
+
+        if (elSelected !== null) {
+          elSelected.innerText = e.target.value
+        }
+      })
+    }
+
+    const elSetUpload = document.getElementById("set_upload")
+
+    if (elSetUpload !== null) {
+      elSetUpload.addEventListener("change", (e) => {
+        const elSelected = document.querySelector(`#${selectedId}`)
+
+        if (elSelected !== null) {
+          const htmlString = `
+            <img src="./assets/images/v1/illustrations/${e.target.files[0].name}" />
+          `
+
+          elSelected.innerHTML = htmlString
+
+          elButterBoard.renderImageItem(elSelected)
+        }
+      })
+    }
+
+    document.addEventListener("click", (e) => {
+      
+      // 水平：左对齐
+      if (e.target.closest(".horizontal-left")) {
+        elButterBoard.shortcuts("horizontal", "begin")
+      }
+
+      // 水平：居中对齐
+      if (e.target.closest(".horizontal-center")) {
+        elButterBoard.shortcuts("horizontal", "middle")
+      }
+
+      // 水平：右对齐
+      if (e.target.closest(".horizontal-right")) {
+        elButterBoard.shortcuts("horizontal", "end")
+      }
+
+      // 水平：分散对齐
+      if (e.target.closest(".horizontal-distribute")) {
+        elButterBoard.shortcuts("horizontal", "distribute")
+      }
+
+      // 垂直：上对齐
+      if (e.target.closest(".vertical-top")) {
+        elButterBoard.shortcuts("vertical", "begin")
+      }
+
+      // 垂直：居中对齐
+      if (e.target.closest(".vertical-center")) {
+        elButterBoard.shortcuts("vertical", "middle")
+      }
+
+      // 垂直：下对齐
+      if (e.target.closest(".vertical-bottom")) {
+        elButterBoard.shortcuts("vertical", "end")
+      }
+
+      // 垂直：分散对齐
+      if (e.target.closest(".vertical-distribute")) {
+        elButterBoard.shortcuts("vertical", "distribute")
+      }
+
+      // 测量距离
+      if (e.target.closest(".measure")) {
+        elButterBoard.shortcuts("", "measure")
+      }
+    })
+  </script>
+</html>
