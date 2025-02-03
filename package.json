@@ -1,0 +1,32 @@
+{
+  "name": "glide-dnr",
+  "version": "1.0.0",
+  "description": "An extremely smooth drag-and-resize JavaScript plugin for creators.",
+  "main": "GlideDNR.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chnkarl/glide-dnr.git"
+  },
+  "keywords": [
+    "js",
+    "ts",
+    "drag",
+    "resize",
+    "zoom",
+    "draggable",
+    "resizable",
+    "drop",
+    "droppable",
+    "figma",
+    "measure"
+  ],
+  "author": "Karl Song",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chnkarl/glide-dnr/issues"
+  },
+  "homepage": "https://github.com/chnkarl/glide-dnr#readme"
+}
