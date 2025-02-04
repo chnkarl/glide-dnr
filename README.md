@@ -18,8 +18,7 @@ npm i glide-dnr
 #### Step 1
 import Glide DNR
 ```
-import GlideDNR from "./GlideDNR.js"
-import GlideDNRItem from "./GlideDNRItem.js"
+import { GlideDNR, GlideDNRItem} from "glide-dnr"
 ```
 
 #### Step 2

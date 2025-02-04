@@ -1,8 +1,8 @@
 {
   "name": "glide-dnr",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "An extremely smooth drag-and-resize JavaScript plugin for creators.",
-  "main": "GlideDNR.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

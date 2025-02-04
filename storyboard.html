@@ -98,7 +98,7 @@
 
           .toolbar {
             flex-grow: 1;
-            visibility: hidden;
+            visibility: visible;
             display: flex;
             gap: 4px;
             justify-content: flex-end;
@@ -109,6 +109,10 @@
               display: inline-flex;
               gap: 4px;
               align-items: center;
+
+              &.aligns {
+                display: none;
+              }
 
               .divider {
                 width: 1px;
@@ -248,14 +252,9 @@
               type="file"
             /> -->
 
-            <img src="./assets/images/v1/illustrations/calendar (no shadow).png" class="item">
-            <img src="./assets/images/v1/illustrations/Diagram.png" class="item">
-            <img src="./assets/images/v1/illustrations/gold cup (no shadow).png" class="item">
-            <img src="./assets/images/v1/illustrations/Hamster.png" class="item">
-            <img src="./assets/images/v1/illustrations/he_sitting_with_notebook.png" class="item">
-            <img src="./assets/images/v1/illustrations/Pacman.png" class="item">
-            <img src="./assets/images/v1/illustrations/Pixel heart.png" class="item">
-            <img src="./assets/images/v1/illustrations/Richie_1.png" class="item">
+            <img src="./assets/images/v1/illustrations/Diagram_thumb.png" class="item" id="form-image-01">
+            <img src="./assets/images/v1/illustrations/gold cup (no shadow) _thumb.png" class="item" id="form-image-02">
+            <img src="./assets/images/v1/illustrations/Pacman_thumb.png" class="item" id="form-image-03">
           </div>
   
           <div class="toolbar">
@@ -420,243 +419,332 @@
 
             <glide-dnr-item id="id-004" left="250" top="280" style="font-size: 70px; font-weight: 700;background: linear-gradient(90deg, red, orange); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;color: red;">Glide DNR</glide-dnr-item>
 
-            <glide-dnr-item id="id-005" left="250" top="380" width="534">
+            <glide-dnr-item id="id-005" left="250" top="380" width="534" style="word-break: break-word;">
               An extremely smooth drag-and-resize JavaScript plugin for creators.
             </glide-dnr-item>
+
           </glide-dnr>
         </div>
       </div>
     </div>
   </body>
   <script type="module">
-    import GlideDNR from "./GlideDNR.js"
-    import GlideDNRItem from "./GlideDNRItem.js"
+    import { GlideDNR, GlideDNRItem } from "."
   </script>
 
-  <script>
-    let selectedId = ""
+<script>
+  let selectedId = ""
 
-    const elFormText = document.querySelector("#form-text")
-    const elFormImage = document.querySelector("#form-image")
+  const elFormText = document.querySelector("#form-text")
+  const elFormImage = document.querySelector("#form-image")
 
-    const elButterBoard = document.querySelector("#glide-dnr")
+  const elButterBoard = document.querySelector("#glide-dnr")
 
-    if (elButterBoard !== null) {
-      // 点击新增文字
-      const elAddText = document.querySelector("#add-text")
+  if (elButterBoard !== null) {
+    // 点击新增文字
+    const elAddText = document.querySelector("#add-text")
 
-      if (elAddText !== null) {
-        elAddText.addEventListener("click", (e) => {
+    if (elAddText !== null) {
+      elAddText.addEventListener("click", (e) => {
 
-          const id = (new Date).getTime()
+        const id = (new Date).getTime()
 
-          const htmlString = `
-          <glide-dnr-item id="item-${id}" style="font-size: 16px; word-break: break-word;">
-            html
-          </glide-dnr-item>
-          `
+        const htmlString = `
+        <glide-dnr-item id="item-${id}" style="font-size: 16px; word-break: break-word;">
+          new text content
+        </glide-dnr-item>
+        `
 
-          // 创建一个 DocumentFragment
-          const fragment = document
-            .createRange()
-            .createContextualFragment(htmlString)
+        // 创建一个 DocumentFragment
+        const fragment = document
+          .createRange()
+          .createContextualFragment(htmlString)
 
-          elButterBoard.appendChild(fragment)
-        })
-      }
+        elButterBoard.appendChild(fragment)
+      })
+    }
 
-      // 点击新增图片
-      const elAddImage = document.querySelector("#add-image")
+    // 点击新增图片
+    const elAddImage = document.querySelector("#add-image")
 
-      if (elAddImage !== null) {
-        elAddImage.addEventListener("click", (e) => {
+    if (elAddImage !== null) {
+      elAddImage.addEventListener("click", (e) => {
 
-          const id = (new Date).getTime()
+        const id = (new Date).getTime()
 
-          const htmlString = `
-          <glide-dnr-item type="image" id="item-${id}" width="124">
-            <img src="./assets/images/v1/illustrations/Pixel heart.png" />
-          </glide-dnr-item>
-          `
+        const htmlString = `
+        <glide-dnr-item type="image" id="item-${id}" width="124">
+          <img src="./assets/images/v1/illustrations/Pixel heart.png" />
+        </glide-dnr-item>
+        `
 
-          // 创建一个 DocumentFragment
-          const fragment = document
-            .createRange()
-            .createContextualFragment(htmlString)
+        // 创建一个 DocumentFragment
+        const fragment = document
+          .createRange()
+          .createContextualFragment(htmlString)
 
-          elButterBoard.appendChild(fragment)
-        })
-      }
+        elButterBoard.appendChild(fragment)
+      })
+    }
 
-      elButterBoard.addEventListener("onSelect", (e) => {
-        if (e.detail.length === 1) {
-          selectedId = e.detail[0].id
+    elButterBoard.addEventListener("onSelect", (e) => {
 
-          const el = document.querySelector(`#${selectedId}`)
+      if (e.detail.length === 1) {
+        selectedId = e.detail[0].id
 
-          if (e.detail[0].type === "text") {
-            if (elFormText !== null) {
-              elFormText.style.display = "inline-flex"
-            }
+        const el = document.querySelector(`#${selectedId}`)
 
-            if (elFormImage !== null) {
-              elFormImage.style.display = "none"
-            }
-          }
-
-          if (e.detail[0].type === "image") {
-            if (elFormImage !== null) {
-              elFormImage.style.display = "inline-flex"
-            }
-
-            if (elFormText !== null) {
-              elFormText.style.display = "none"
-            }
-          }
-        } else {
+        if (e.detail[0].type === "general") {
           if (elFormText !== null) {
-            elFormText.style.display = "none"
+            elFormText.style.display = "inline-flex"
           }
 
           if (elFormImage !== null) {
             elFormImage.style.display = "none"
           }
+        }
 
-          const elForm = document.querySelector(`#form`)
+        if (e.detail[0].type === "image") {
+          if (elFormImage !== null) {
+            elFormImage.style.display = "inline-flex"
+          }
 
-          if (elForm !== null) {
-            elForm.reset()
+          if (elFormText !== null) {
+            elFormText.style.display = "none"
           }
         }
-      })
-    }
+      } else if (e.detail.length > 1) {
 
-    elButterBoard.addEventListener("onActions", (e) => {
-      
-      console.log('e.detail: ', e.detail)
+        const elAligns = document.querySelector(`.aligns`)
 
+        if (elAligns !== null) {
+          aligns.style.display = "inline-flex"
+        }
+
+      }
+      else {
+        const elAligns = document.querySelector(`.aligns`)
+
+        if (elAligns !== null) {
+          aligns.style.display = "none"
+        }
+
+        if (elFormText !== null) {
+        elFormText.style.display = "none"
+        }
+
+        if (elFormImage !== null) {
+          elFormImage.style.display = "none"
+        }
+
+        const elForm = document.querySelector(`#form`)
+
+        if (elForm !== null) {
+          elForm.reset()
+        }
+      }
     })
+  }
+
+  elButterBoard.addEventListener("onActions", (e) => {
     
+    console.log('e.detail: ', e.detail)
 
-    // 监听移动和缩放
-    elButterBoard.addEventListener("onChange", (e) => {
-      // console.log('e.detail: ', e.detail)
+  })
+  
+
+  // 监听移动和缩放
+  elButterBoard.addEventListener("onChange", (e) => {
+    // console.log('e.detail: ', e.detail)
+  })
+
+  const elSetFontFamily = document.getElementById("set_font-family")
+
+  if (elSetFontFamily !== null) {
+    elSetFontFamily.addEventListener("change", () => {
+      console.log("value: ", elSetFontFamily.value)
+
+      const elSelected = document.querySelector(`#${selectedId}`)
+
+      if (elSelected !== null) {
+        elSelected.style.fontSize = elSetFontFamily.value
+      }
     })
+  }
 
-    const elSetFontFamily = document.getElementById("set_font-family")
+  const elSetFontWeight = document.getElementById("set_font-weight")
 
-    if (elSetFontFamily !== null) {
-      elSetFontFamily.addEventListener("change", () => {
-        console.log("value: ", elSetFontFamily.value)
+  if (elSetFontWeight !== null) {
+    elSetFontWeight.addEventListener("change", () => {
+      const elSelected = document.querySelector(`#${selectedId}`)
+
+      if (elSelected !== null) {
+        elSelected.style.fontWeight = elSetFontWeight.value
+      }
+    })
+  }
+
+  const elSetColor = document.getElementById("set_color")
+
+  if (elSetColor !== null) {
+    elSetColor.addEventListener("input", (e) => {
+      const elSelected = document.querySelector(`#${selectedId}`)
+
+      if (elSelected !== null) {
+        elSelected.style.color = e.target.value
+      }
+    })
+  }
+
+  const elSetContent = document.getElementById("set_content")
+
+
+  if (elSetContent !== null) {
+    elSetContent.addEventListener("input", (e) => {
+      const elSelected = document.querySelector(`#${selectedId}`)
+
+      console.log('elSelected: ', elSelected)
+      console.log('e.target.value: ', e.target.value)
+
+      if (elSelected !== null) {
+        elSelected.innerHTML = e.target.value
+      }
+    })
+  }
+
+  // const elSetUpload = document.getElementById("set_upload")
+
+  // if (elSetUpload !== null) {
+  //   elSetUpload.addEventListener("change", (e) => {
+  //     const elSelected = document.querySelector(`#${selectedId}`)
+
+  //     if (elSelected !== null) {
+  //       const htmlString = `
+  //         <img src="./assets/images/v1/illustrations/${e.target.files[0].name}" />
+  //       `
+
+  //       elSelected.innerHTML = htmlString
+
+  //       elButterBoard.renderImageItem(elSelected)
+  //     }
+  //   })
+  // }
+
+  const elSetUpload01 = document.getElementById("form-image-01")
+
+  if (elSetUpload01 !== null) {
+
+    elSetUpload01.addEventListener("click", (e) => {
+
+      if (selectedId !== "") {
 
         const elSelected = document.querySelector(`#${selectedId}`)
-
-        if (elSelected !== null) {
-          elSelected.style.fontSize = elSetFontFamily.value
-        }
-      })
-    }
-
-    const elSetFontWeight = document.getElementById("set_font-weight")
-
-    if (elSetFontWeight !== null) {
-      elSetFontWeight.addEventListener("change", () => {
-        const elSelected = document.querySelector(`#${selectedId}`)
-
-        if (elSelected !== null) {
-          elSelected.style.fontWeight = elSetFontWeight.value
-        }
-      })
-    }
-
-    const elSetColor = document.getElementById("set_color")
-
-    if (elSetColor !== null) {
-      elSetColor.addEventListener("input", (e) => {
-        const elSelected = document.querySelector(`#${selectedId}`)
-
-        if (elSelected !== null) {
-          elSelected.style.color = e.target.value
-        }
-      })
-    }
-
-    const elSetContent = document.getElementById("set_content")
-
-    if (elSetContent !== null) {
-      elSetContent.addEventListener("input", (e) => {
-        const elSelected = document.querySelector(`#${selectedId}`)
-
-        if (elSelected !== null) {
-          elSelected.innerText = e.target.value
-        }
-      })
-    }
-
-    const elSetUpload = document.getElementById("set_upload")
-
-    if (elSetUpload !== null) {
-      elSetUpload.addEventListener("change", (e) => {
-        const elSelected = document.querySelector(`#${selectedId}`)
-
+  
         if (elSelected !== null) {
           const htmlString = `
-            <img src="./assets/images/v1/illustrations/${e.target.files[0].name}" />
+            <img src="./assets/images/v1/illustrations/Diagram.png" />
+          `
+  
+          elSelected.innerHTML = htmlString
+  
+          elButterBoard.renderImageItem(elSelected)
+        }
+      }
+    })
+  }
+
+  const elSetUpload02 = document.getElementById("form-image-02")
+
+  if (elSetUpload02 !== null) {
+
+    elSetUpload02.addEventListener("click", (e) => {
+
+      if (selectedId !== "") {
+
+        const elSelected = document.querySelector(`#${selectedId}`)
+      
+        if (elSelected !== null) {
+          const htmlString = `
+            <img src="./assets/images/v1/illustrations/gold cup (no shadow).png" />
           `
 
           elSelected.innerHTML = htmlString
 
           elButterBoard.renderImageItem(elSelected)
         }
-      })
-    }
-
-    document.addEventListener("click", (e) => {
-      
-      // 水平：左对齐
-      if (e.target.closest(".horizontal-left")) {
-        elButterBoard.shortcuts("horizontal", "begin")
-      }
-
-      // 水平：居中对齐
-      if (e.target.closest(".horizontal-center")) {
-        elButterBoard.shortcuts("horizontal", "middle")
-      }
-
-      // 水平：右对齐
-      if (e.target.closest(".horizontal-right")) {
-        elButterBoard.shortcuts("horizontal", "end")
-      }
-
-      // 水平：分散对齐
-      if (e.target.closest(".horizontal-distribute")) {
-        elButterBoard.shortcuts("horizontal", "distribute")
-      }
-
-      // 垂直：上对齐
-      if (e.target.closest(".vertical-top")) {
-        elButterBoard.shortcuts("vertical", "begin")
-      }
-
-      // 垂直：居中对齐
-      if (e.target.closest(".vertical-center")) {
-        elButterBoard.shortcuts("vertical", "middle")
-      }
-
-      // 垂直：下对齐
-      if (e.target.closest(".vertical-bottom")) {
-        elButterBoard.shortcuts("vertical", "end")
-      }
-
-      // 垂直：分散对齐
-      if (e.target.closest(".vertical-distribute")) {
-        elButterBoard.shortcuts("vertical", "distribute")
-      }
-
-      // 测量距离
-      if (e.target.closest(".measure")) {
-        elButterBoard.shortcuts("", "measure")
       }
     })
-  </script>
+  }
+
+  const elSetUpload03 = document.getElementById("form-image-03")
+
+  if (elSetUpload03 !== null) {
+
+    elSetUpload03.addEventListener("click", (e) => {
+
+      if (selectedId !== "") {
+
+        const elSelected = document.querySelector(`#${selectedId}`)
+      
+        if (elSelected !== null) {
+          const htmlString = `
+            <img src="./assets/images/v1/illustrations/Pacman.png" />
+          `
+
+          elSelected.innerHTML = htmlString
+
+          elButterBoard.renderImageItem(elSelected)
+        }
+      }
+    })
+  }
+
+  document.addEventListener("click", (e) => {
+    
+    // 水平：左对齐
+    if (e.target.closest(".horizontal-left")) {
+      elButterBoard.shortcuts("horizontal", "begin")
+    }
+
+    // 水平：居中对齐
+    if (e.target.closest(".horizontal-center")) {
+      elButterBoard.shortcuts("horizontal", "middle")
+    }
+
+    // 水平：右对齐
+    if (e.target.closest(".horizontal-right")) {
+      elButterBoard.shortcuts("horizontal", "end")
+    }
+
+    // 水平：分散对齐
+    if (e.target.closest(".horizontal-distribute")) {
+      elButterBoard.shortcuts("horizontal", "distribute")
+    }
+
+    // 垂直：上对齐
+    if (e.target.closest(".vertical-top")) {
+      elButterBoard.shortcuts("vertical", "begin")
+    }
+
+    // 垂直：居中对齐
+    if (e.target.closest(".vertical-center")) {
+      elButterBoard.shortcuts("vertical", "middle")
+    }
+
+    // 垂直：下对齐
+    if (e.target.closest(".vertical-bottom")) {
+      elButterBoard.shortcuts("vertical", "end")
+    }
+
+    // 垂直：分散对齐
+    if (e.target.closest(".vertical-distribute")) {
+      elButterBoard.shortcuts("vertical", "distribute")
+    }
+
+    // 测量距离
+    if (e.target.closest(".measure")) {
+      elButterBoard.shortcuts("", "measure")
+    }
+  })
+</script>
 </html>
