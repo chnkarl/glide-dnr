@@ -15,10 +15,17 @@ npm i glide-dnr
 
 ### Usage
 
-#### Step 1
-import Glide DNR
+#### Step 1: import Glide DNR
+
+import as a module
 ```
-import { GlideDNR, GlideDNRItem} from "glide-dnr"
+import { GlideDNR, GlideDNRItem } from "glide-dnr"
+```
+
+or use CDN directly
+```
+import GlideDNR from "https://cdn.jsdelivr.net/npm/glide-dnr@1.0.5/GlideDNR.js"
+import GlideDNRItem from "https://cdn.jsdelivr.net/npm/glide-dnr@1.0.5/GlideDNRItem.js"
 ```
 
 #### Step 2
@@ -76,9 +83,9 @@ GlideDNR.addEventListener("onChange", (e) => {
 
 ### Advanced Usage
 
-#### update content of Glide-dnr-item
+#### Update content of Glide-dnr-item
 
-##### update general item
+##### Update general item
 ```
 const elSetContent = document.getElementById("set_content")
 
@@ -98,7 +105,7 @@ if (elSetContent !== null) {
 }
 ```
 
-##### update image item
+##### Update image item
 ```
 #form-image-01 is a button，which is used to update image src attribute.
 const elSetUpload01 = document.getElementById("form-image-01")
@@ -126,3 +133,14 @@ if (elSetUpload01 !== null) {
   })
 }
 ```
+
+### Framework Supportion
+
+if you haven't used web component before in js framework, here are some suggestions to read before:
+
+[React](https://legacy.reactjs.org/docs/web-components.html)
+
+[Vue](https://vuejs.org/guide/extras/web-components.html)
+
+[Angular](https://angular.love/angular-web-components-a-complete-guide/)
+
