@@ -1,9 +1,11 @@
 GlideDNR(drag-and-resize)
 ---
 
-An extremely smooth drag-and-resize JavaScript plugin for creators. GlideDNR is written with [Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components), which is natively supports any framework (vue, react……), especially original html and js.
+An extremely smooth drag-and-resize JavaScript plugin for creators. GlideDNR is written with [Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components), which natively supports any framework (vue, react……), especially original html and js.
 
 ![cover](./cover_v1.2.png)
+
+If you don't see the cover image above, you need to use VPN to reload the page again.
 
 ### Demo
 The [Demo](https://chnkarl.github.io/glide-dnr/storyboard.html) show how the plugin works.
@@ -24,8 +26,8 @@ import { GlideDNR, GlideDNRItem } from "glide-dnr"
 
 or use CDN directly
 ```
-import GlideDNR from "https://cdn.jsdelivr.net/npm/glide-dnr@1.0.5/GlideDNR.js"
-import GlideDNRItem from "https://cdn.jsdelivr.net/npm/glide-dnr@1.0.5/GlideDNRItem.js"
+import GlideDNR from "https://cdn.jsdelivr.net/npm/glide-dnr@1.0.6/GlideDNR.js"
+import GlideDNRItem from "https://cdn.jsdelivr.net/npm/glide-dnr@1.0.6/GlideDNRItem.js"
 ```
 
 #### Step 2
@@ -136,7 +138,7 @@ if (elSetUpload01 !== null) {
 
 ### Framework Supportion
 
-if you haven't used web component before in js framework, here are some suggestions to read before:
+if you haven't used web component before in Js framework, here are some suggestions to read before:
 
 [React](https://legacy.reactjs.org/docs/web-components.html)
 
