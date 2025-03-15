@@ -3,7 +3,7 @@ GlideDNR(drag-and-resize)
 
 An extremely smooth drag-and-resize JavaScript plugin for creators. GlideDNR is written with [Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components), which natively supports any framework (vue, react……), especially original html and js.
 
-![cover](./cover_v1.2.png)
+![cover](./cover_v1.3.png)
 
 If you don't see the cover image above, you need to use VPN to reload the page again.
 
@@ -26,8 +26,7 @@ import { GlideDNR, GlideDNRItem } from "glide-dnr"
 
 or use CDN directly
 ```
-import GlideDNR from "https://cdn.jsdelivr.net/npm/glide-dnr@1.0.7/GlideDNR.js"
-import GlideDNRItem from "https://cdn.jsdelivr.net/npm/glide-dnr@1.0.7/GlideDNRItem.js"
+import { GlideDNR, GlideDNRItem } from "https://cdn.jsdelivr.net/npm/glide-dnr@1.0.8/index.js"
 ```
 
 #### Step 2
@@ -63,6 +62,23 @@ import GlideDNRItem from "https://cdn.jsdelivr.net/npm/glide-dnr@1.0.7/GlideDNRI
 </glide-dnr>
 ```
 
+### Attributes
+
+#### toolbar
+show toolbar like: alignments, distribution
+
+#### measure
+show measurement button on toolbar, which allow u measure distance between selected and target(mouse on)
+
+#### toolbar-placement
+set toolbar placement, the value is float or top，the default value is float
+
+#### color-primary
+set primary color like: hex or rgb
+
+#### modify-outside
+allow you to modify glide-dnr-item attributes(left,top,width,height) value outside the component
+
 ### Methods
 
 #### onSelect
@@ -79,6 +95,24 @@ GlideDNR.addEventListener("onSelect", (e) => {
 const GlideDNR = document.querySelector("#glide-dnr")
 
 GlideDNR.addEventListener("onChange", (e) => {
+  console.log("e.detail: ", e.detail)
+})
+```
+
+#### onMouseDown
+```
+const GlideDNR = document.querySelector("#glide-dnr")
+
+GlideDNR.addEventListener("onMouseDown", (e) => {
+  console.log("e.detail: ", e.detail)
+})
+```
+
+#### onMouseUp
+```
+const GlideDNR = document.querySelector("#glide-dnr")
+
+GlideDNR.addEventListener("onMouseUp", (e) => {
   console.log("e.detail: ", e.detail)
 })
 ```
