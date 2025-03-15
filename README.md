@@ -26,7 +26,7 @@ import { GlideDNR, GlideDNRItem } from "glide-dnr"
 
 or use CDN directly
 ```
-import { GlideDNR, GlideDNRItem } from "https://cdn.jsdelivr.net/npm/glide-dnr@1.0.8/index.js"
+import { GlideDNR, GlideDNRItem } from "https://cdn.jsdelivr.net/npm/glide-dnr@1.0.9/index.js"
 ```
 
 #### Step 2
