@@ -1,6 +1,6 @@
 {
   "name": "glide-dnr",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "An extremely smooth drag-and-resize JavaScript plugin for creators.",
   "main": "index.js",
   "types": "types/index.d.ts",
